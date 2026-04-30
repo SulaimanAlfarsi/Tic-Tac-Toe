@@ -10,6 +10,7 @@ let computerThinking = false;
 let winningPattern = null;
 let board = Array(10).fill("");
 let messageTimer = null;
+let confettiTimer = null;
 
 const playerTurnBox = document.getElementsByClassName("player-turn-box")[0];
 const gameMessage = document.getElementById("game-message");
@@ -36,6 +37,44 @@ function markWinningPattern(pattern) {
         const boxIndex = Number(box.id);
         box.classList.toggle("winner-cell", pattern.includes(boxIndex));
         box.classList.toggle("dimmed-cell", !pattern.includes(boxIndex));
+    });
+}
+
+function celebrateWinner() {
+    if (typeof confetti !== "function") {
+        return;
+    }
+
+    stopWinnerCelebration();
+    launchConfettiBurst();
+
+    confettiTimer = setInterval(launchConfettiBurst, 900);
+}
+
+function stopWinnerCelebration() {
+    clearInterval(confettiTimer);
+    confettiTimer = null;
+}
+
+function launchConfettiBurst() {
+    confetti({
+        particleCount: 70,
+        spread: 80,
+        origin: { x: 0.5, y: 0.65 }
+    });
+
+    confetti({
+        particleCount: 45,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.8 }
+    });
+
+    confetti({
+        particleCount: 45,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.8 }
     });
 }
 
@@ -245,6 +284,7 @@ function finishMove(currentPlayer) {
         const statusType = gameMode === "players" || currentPlayer === humanPlayer ? "success" : "error";
         updateStatus(winnerName + " <button class='restart-button' onclick='reloadGame()'>Restart</button>", statusType);
         showMessage(currentPlayer + " completed three in a row.", statusType === "error" ? "warning" : "info");
+        celebrateWinner();
         setBoardEnabled(false);
         return true;
     }
@@ -304,6 +344,7 @@ function startNewGame() {
     winningPattern = null;
     board = Array(10).fill("");
     clearMessage();
+    stopWinnerCelebration();
     difficultyControl.classList.toggle("hidden", gameMode === "players");
     symbolLabel.textContent = gameMode === "players" ? "Player 1" : "You play";
 
