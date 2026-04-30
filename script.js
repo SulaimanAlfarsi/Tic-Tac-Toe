@@ -11,6 +11,7 @@ let winningPattern = null;
 let board = Array(10).fill("");
 let messageTimer = null;
 let confettiTimer = null;
+let confettiTimeout = null;
 
 const playerTurnBox = document.getElementsByClassName("player-turn-box")[0];
 const gameMessage = document.getElementById("game-message");
@@ -41,39 +42,45 @@ function markWinningPattern(pattern) {
 }
 
 function celebrateWinner() {
-    if (typeof confetti !== "function") {
+    if (typeof window.confetti !== "function") {
         return;
     }
 
     stopWinnerCelebration();
     launchConfettiBurst();
 
-    confettiTimer = setInterval(launchConfettiBurst, 900);
+    confettiTimer = setInterval(launchConfettiBurst, 550);
+    confettiTimeout = setTimeout(stopWinnerCelebration, 7000);
 }
 
 function stopWinnerCelebration() {
     clearInterval(confettiTimer);
+    clearTimeout(confettiTimeout);
     confettiTimer = null;
+    confettiTimeout = null;
 }
 
 function launchConfettiBurst() {
-    confetti({
-        particleCount: 70,
-        spread: 80,
+    window.confetti({
+        particleCount: 90,
+        spread: 95,
+        startVelocity: 38,
         origin: { x: 0.5, y: 0.65 }
     });
 
-    confetti({
-        particleCount: 45,
+    window.confetti({
+        particleCount: 60,
         angle: 60,
-        spread: 55,
+        spread: 65,
+        startVelocity: 48,
         origin: { x: 0, y: 0.8 }
     });
 
-    confetti({
-        particleCount: 45,
+    window.confetti({
+        particleCount: 60,
         angle: 120,
-        spread: 55,
+        spread: 65,
+        startVelocity: 48,
         origin: { x: 1, y: 0.8 }
     });
 }

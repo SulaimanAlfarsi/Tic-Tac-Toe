@@ -9,7 +9,7 @@ A browser-based Tic Tac Toe game built with HTML, CSS, and JavaScript.
 - Select Easy, Medium, or Hard computer difficulty.
 - Shows styled status and warning messages.
 - Highlights the winning cells.
-- Uses Canvas Confetti for the win celebration.
+- Uses Canvas Confetti for a looping win celebration.
 
 ## Files
 
@@ -42,4 +42,4 @@ This project uses Canvas Confetti from jsDelivr:
 
 `https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js`
 
-Canvas Confetti is used only for the win celebration animation.
+Canvas Confetti is used only for the win celebration animation. The celebration loops for several seconds after any win in Computer or 2 Player mode.
