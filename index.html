@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="player-turn-box game-text"></div>
+    <div class="message-box" id="game-message" aria-live="polite"></div>
+    <div class="controls">
+        <div class="control-group">
+            <label for="game-mode">Mode</label>
+            <select id="game-mode">
+                <option value="computer">Computer</option>
+                <option value="players">2 Player</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="player-symbol" id="symbol-label">You play</label>
+            <select id="player-symbol">
+                <option value="X">X</option>
+                <option value="O">O</option>
+            </select>
+        </div>
+        <div class="control-group" id="difficulty-control">
+            <label for="difficulty">Level</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button id="new-game">New Game</button>
+    </div>
+    <div class="game-box game-text">
+        <div class="box" id="1"></div>
+        <div class="box" id="2"></div>
+        <div class="box" id="3"></div>
+        <div class="box" id="4"></div>
+        <div class="box" id="5"></div>
+        <div class="box" id="6"></div>
+        <div class="box" id="7"></div>
+        <div class="box" id="8"></div>
+        <div class="box" id="9"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
